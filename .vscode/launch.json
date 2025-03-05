@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CampusDeVeranoApplication",
+            "request": "launch",
+            "mainClass": "com.example.CampusDeVerano.CampusDeVeranoApplication",
+            "projectName": "CampusDeVerano"
+        },
+        {
+            "type": "java",
             "name": "ReservaRestauranteApplication",
             "request": "launch",
             "mainClass": "com.ies.tallerVerano.reservaRestaurante.ReservaRestauranteApplication",
