@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping ("/usuario")
+@RequestMapping 
 public class UsuarioController {
     
-    @GetMapping("/usu")
+    @GetMapping("/usuario")
     public String holaMundo(){
         return "Hola mundo";
     }

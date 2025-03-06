@@ -1,9 +1,14 @@
 package com.example.CampusDeVerano.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import lombok.*;
+
+// import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "reserva")
 public class Reserva {
 
@@ -16,36 +21,18 @@ public class Reserva {
     @JoinColumn(name = "usu_id", nullable = false)
     private Usuario usuario;
 
-    @ManyToMany
-    @JoinTable(
-        name = "reserva_menu", // Tabla intermedia
-        joinColumns = @JoinColumn(name = "reserva_id"),
-        inverseJoinColumns = @JoinColumn(name = "menu_id")
-    )
-    private List<Menu> menus;
+    @Column(nullable = false)
+    private Integer cantidad_persona;
 
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String turno;
+    
+    //@ManyToMany
+    //@JoinTable(
+    //    name = "reserva_menu", // Tabla intermedia
+    //   joinColumns = @JoinColumn(name = "reserva_id"),
+    //    inverseJoinColumns = @JoinColumn(name = "menu_id")
+    //)
+    //private List<Menu> menus;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
 }
