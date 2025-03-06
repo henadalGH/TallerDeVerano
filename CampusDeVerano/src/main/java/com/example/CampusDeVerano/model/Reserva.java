@@ -27,12 +27,4 @@ public class Reserva {
     @Column(nullable = false)
     private String turno;
     
-    //@ManyToMany
-    //@JoinTable(
-    //    name = "reserva_menu", // Tabla intermedia
-    //   joinColumns = @JoinColumn(name = "reserva_id"),
-    //    inverseJoinColumns = @JoinColumn(name = "menu_id")
-    //)
-    //private List<Menu> menus;
-
 }
