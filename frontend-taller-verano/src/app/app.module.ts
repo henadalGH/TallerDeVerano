@@ -4,10 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RestauranteComponent } from './components/restaurante/restaurante.component';
+import { ReservaComponent } from './components/reserva/reserva.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { PlatoComponent } from './components/plato/plato.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RestauranteComponent,
+    ReservaComponent,
+    UsuarioComponent,
+    MenuComponent,
+    PlatoComponent
   ],
   imports: [
     BrowserModule,
