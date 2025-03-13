@@ -1,5 +1,7 @@
 package com.example.CampusDeVerano.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +21,7 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "usu_id", nullable = false)
+    @JsonBackReference
     private Usuario usuario;
 
     @Column(nullable = false)
