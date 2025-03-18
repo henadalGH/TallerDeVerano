@@ -23,6 +23,16 @@ public class ReservaController {
         return reservaService.obtenerTodas();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Reserva> obtenerPorId(@PathVariable Integer id) {
+        Reserva reserva = reservaService.obtenerPorId(id);
+        if (reserva != null) {
+            return ResponseEntity.ok(reserva);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Reserva> crearReserva(@RequestBody Reserva reserva) {
         Reserva nuevaReserva = reservaService.guardar(reserva);

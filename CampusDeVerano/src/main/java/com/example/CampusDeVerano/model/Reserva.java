@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-// import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -21,7 +19,7 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "usu_id", nullable = false)
-    @JsonBackReference
+    @JsonBackReference  // Evita el ciclo de serialización
     private Usuario usuario;
 
     @Column(nullable = false)
@@ -29,5 +27,4 @@ public class Reserva {
 
     @Column(nullable = false)
     private String turno;
-    
 }

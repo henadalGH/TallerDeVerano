@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -32,7 +34,8 @@ public class Plato {
     @Column(length = 20)
     private String categoria;
 
-    @ManyToMany(mappedBy = "platos")
-    private List<Menu> menus;
+    @OneToMany(mappedBy = "plato", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<MenuPlato> menuPlatos;
 
 }
