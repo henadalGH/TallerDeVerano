@@ -28,7 +28,6 @@ public class HttpSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Configuración principal de seguridad
         return http
-            
             .csrf(csrf -> csrf.disable())  // Deshabilitar CSRF ya que estamos trabajando con JWT
             .sessionManagement(sessMagConfig -> 
                 sessMagConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sesión sin estado
@@ -42,15 +41,15 @@ public class HttpSecurityConfig {
         
         // Permitir acceso a la ruta /login sin autenticación
         authReqConfig.requestMatchers(HttpMethod.GET, "/auth/login").permitAll();
+        authReqConfig.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();  // También asegurarse de que el POST sea permitido
+
         authReqConfig.requestMatchers(HttpMethod.GET, "/munus/restaurante/{restauranteId}").permitAll();
 
-        authReqConfig.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
-        
         // Resto de las peticiones requieren autenticación
         authReqConfig.requestMatchers(HttpMethod.GET, "/menus").hasRole("USER");
         
         // Cualquier otra petición requiere autenticación
         authReqConfig.anyRequest().authenticated();
     }
-    
 }
+

@@ -6,6 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpHeaders;
+
 
 import com.Reseva.Taller.Reservas.Sevice.JwtService;
 
@@ -25,21 +27,24 @@ public class AuthController {
 
     // Esta ruta manejará el GET de la página de login
     @GetMapping("/login")
-    public ResponseEntity<String> showLoginPage() {
-        // Aquí podrías devolver el HTML del formulario de login
-        String loginForm = "<html>" +
-                "<body>" +
-                "<h2>Login</h2>" +
-                "<form action='/auth/login' method='POST'>" +
-                "Correo: <input type='email' name='correo' required><br>" +
-                "Contraseña: <input type='password' name='contrasena' required><br>" +
-                "<input type='submit' value='Login'>" +
-                "</form>" +
-                "</body>" +
-                "</html>";
-        return ResponseEntity.ok(loginForm);
-    }
+public ResponseEntity<String> showLoginPage() {
+    String loginForm = "<html>" +
+            "<body>" +
+            "<h2>Login</h2>" +
+            "<form action='/auth/login' method='POST'>" +
+            "Correo: <input type='email' name='correo' required><br>" +
+            "Contraseña: <input type='password' name='contrasena' required><br>" +
+            "<input type='submit' value='Login'>" +
+            "</form>" +
+            "</body>" +
+            "</html>";
 
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CACHE_CONTROL, "no-store, no-cache, must-revalidate")
+        .header(HttpHeaders.PRAGMA, "no-cache")
+        .header(HttpHeaders.EXPIRES, "0")
+        .body(loginForm);
+}
     // Esta ruta manejará el POST cuando el usuario envíe el formulario de login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String correo, @RequestParam String contrasena) {
