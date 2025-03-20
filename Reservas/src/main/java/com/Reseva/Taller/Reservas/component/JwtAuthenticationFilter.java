@@ -28,40 +28,47 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
 
-        // Obtener el header Authorization
-        String authorizationHeader = request.getHeader("Authorization");
-
-        // Validar si el encabezado contiene un token válido
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        // Extraer el token JWT
-        String jwt = authorizationHeader.substring(7);
-
-        // Extraer el nombre de usuario
-        String username = jwtService.extractUsername(jwt);
-
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            // Buscar el usuario en la base de datos
-            Usuario usuario = usuarioService.findByCorreo(username)
-                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado con correo: " + username));
-
-            // Crear un token de autenticación
-            UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
-
-            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-            // Establecer la autenticación en el contexto de seguridad
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        }
-
-        // Continuar con el filtro
+    // Excluir el filtro para la ruta de login
+    String path = request.getRequestURI();
+    if (path.equals("/auth/login")) {
         filterChain.doFilter(request, response);
+        return;
     }
+
+    // Obtener el header Authorization
+    String authorizationHeader = request.getHeader("Authorization");
+
+    // Validar si el encabezado contiene un token válido
+    if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+        filterChain.doFilter(request, response);
+        return;
+    }
+
+    // Extraer el token JWT
+    String jwt = authorizationHeader.substring(7);
+
+    // Extraer el nombre de usuario
+    String username = jwtService.extractUsername(jwt);
+
+    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        // Buscar el usuario en la base de datos
+        Usuario usuario = usuarioService.findByCorreo(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con correo: " + username));
+
+        // Crear un token de autenticación
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+
+        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+        // Establecer la autenticación en el contexto de seguridad
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+    }
+
+    // Continuar con el filtro
+    filterChain.doFilter(request, response);
+}
 }

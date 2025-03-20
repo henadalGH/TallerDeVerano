@@ -26,13 +26,13 @@ public class AuthenticationService {
 
         // Paso 1: Autenticar al usuario con nombre y contraseña
         UsernamePasswordAuthenticationToken authenticationToken = 
-            new UsernamePasswordAuthenticationToken(authRequest.getNombre(), authRequest.getPassword());
+            new UsernamePasswordAuthenticationToken(authRequest.getCorreo(), authRequest.getContrasena());
         
         // Autenticación usando AuthenticationManager
         authenticationManager.authenticate(authenticationToken);
 
         // Paso 2: Obtener detalles del usuario desde UsuarioService
-        UserDetails userDetails = usuarioService.findByCorreo(authRequest.getNombre())
+        UserDetails userDetails = usuarioService.findByCorreo(authRequest.getCorreo())
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         // Paso 3: Generar el token JWT

@@ -1,25 +1,11 @@
 package com.Reseva.Taller.Reservas.dto;
 
 public class AuthenticationRequest {
-    private String nombre;
-    private String password;
+    private String correo;
+    private String contrasena;
 
-
-    public String getNombre(){
-        return nombre;
-    }
-
-    public String getPassword(){
-        return password;
-    }
-
-    public void setNombre(String nombre)
-    {
-        this.nombre=nombre;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password=password;
-    } 
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo) { this.correo = correo; }
+    public String getContrasena() { return contrasena; }
+    public void setContrasena(String contrasena) { this.contrasena = contrasena; }
 }
