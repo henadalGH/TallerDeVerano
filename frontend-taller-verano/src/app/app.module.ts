@@ -9,6 +9,7 @@ import { ReservaComponent } from './components/reserva/reserva.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { PlatoComponent } from './components/plato/plato.component';
+import { RestauranteDetalleComponent } from './components/components/restaurante/restaurante-detalle/restaurante-detalle.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PlatoComponent } from './components/plato/plato.component';
     ReservaComponent,
     UsuarioComponent,
     MenuComponent,
-    PlatoComponent
+    PlatoComponent,
+    RestauranteDetalleComponent
   ],
   imports: [
     BrowserModule,

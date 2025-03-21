@@ -1,114 +1,128 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
 
+/* Estructura general */
 .menu-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.menu-tabs {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin: 10px 0;
-}
-
-.menu-tabs button {
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 2px solid black;
-    background-color: #ccc;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.menu-tabs .active {
-    background-color: #888;
-}
-
-.usuario-btn {
-    padding: 10px;
-    border-radius: 20px;
-    background-color: #ddd;
-}
-
-.menu-wrapper {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
-
-.menu-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    width: 80%;
-}
-
-.restaurant-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    width: 80%;
-}
-
-.restaurant-card {
-    background-color: gray;
-    padding: 20px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.restaurant-header {
-    background-color: #a3a3ff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
-}
-
-.info-btn {
-    background-color: #a3d9a5;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* Menú lateral */
-.side-menu {
-    width: 200px;
     height: 100vh;
-    background-color: #555;
+    background-color: #f5f5f5;
+  }
+  
+  /* Barra lateral */
+  .side-menu {
+    width: 220px;
+    background-color: #444;
     color: white;
-    padding-top: 50px;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-.side-menu ul {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .side-menu .user-info {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .side-menu ul {
     list-style: none;
     padding: 0;
-}
-
-.side-menu li {
-    padding: 15px;
+  }
+  
+  .side-menu li {
+    margin: 15px 0;
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.side-menu li:hover {
-    background: #777;
-}
+  }
+  
+  /* Contenido principal */
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f0f8ff; /* Un celeste claro por ejemplo */
+    border-radius: 0 0 10px 10px;
+  }
+    
+  
+  /* Tabs estilo Chrome */
+  .menu-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .menu-tabs .tab {
+    background-color: #ccc;
+    border: 1px solid #888;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu-tabs .tab.active {
+    background-color: white;
+    border-bottom: 1px solid white;
+    font-weight: bold;
+  }
+  
+  .menu-tabs .tab:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Grid de restaurantes */
+  .restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Card restaurante */
+  .restaurant-card {
+    background-color: #888;
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .restaurant-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .restaurant-header {
+    background-color: #aab4f8;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .info-text {
+    background-color: #b0e7b3;
+    color: black;
+    padding: 8px;
+    text-align: center;
+    border-radius: 5px;
+  }
+ 
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+  }
+  
+  .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #444;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
