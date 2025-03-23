@@ -1,0 +1,190 @@
+
+
+create table USUARIO
+(
+    usu_id int AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) not null,
+    correo VARCHAR(40) UNIQUE NOT NULL,
+    contrasenia varchar(20) NOT NULL,
+    telefono INT,
+    direccion VARCHAR(40),
+    es_Admin BOOLEAN,
+    cuil_cuit VARCHAR(15) 
+)
+
+
+
+create Table Restaurante(
+    ret_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL,
+    num_suc INT not NULL,
+    email VARCHAR(40) not NULL,
+    direccion VARCHAR(40) not NULL,
+    telefono int,
+    turno VARCHAR(20),
+    imagen VARCHAR(40),
+    estacionamiento BOOLEAN,
+    accesibilidad BOOLEAN
+)
+
+--tercero--
+CREATE TABLE Reserva (
+    res_id INT AUTO_INCREMENT PRIMARY KEY,
+    turno VARCHAR(20),
+    cantidad_persona int NOT null,
+    ret_id int,
+    usu_id INT,
+    FOREIGN KEY (usu_id) REFERENCES Usuario(usu_id),
+    FOREIGN KEY (ret_id) REFERENCES Restaurante(ret_id)
+) 
+
+--cuarto--
+
+create Table Plato(
+    pla_id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) not NULL,
+    precio INT NOT NULL,
+    descripcion VARCHAR(40),
+    imagen VARCHAR(40),
+    categoria VARCHAR(20)
+)
+
+--quinto-->
+
+create Table Menu(
+    men_id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_menu VARCHAR(20),
+    ret_id INT,
+    Foreign Key (ret_id) REFERENCES Restaurante(ret_id),
+    pla_id INT,
+    Foreign Key (pla_id) REFERENCES Plato(pla_id)
+)
+
+--sexto-->
+
+create table menuplato(
+    men_plat int AUTO_INCREMENT PRIMARY KEY,
+    men_id INT,
+    Foreign Key (men_id) REFERENCES Menu(men_id),
+    pla_id int,
+    Foreign Key (pla_id) REFERENCES Plato(pla_id)    
+)
+
+
+-- ==========================================
+-- inserts_reservas.sql
+-- Descripción: Poblar las tablas con datos de ejemplo
+-- ==========================================
+
+-- Asegúrate de usar la base de datos 'reservas'
+USE reservas;
+
+-- ==========================================
+-- INSERTS EN TABLA USUARIO
+-- ==========================================
+INSERT INTO USUARIO 
+    (nombre, correo, contrasenia, telefono, direccion, es_Admin, cuil_cuit)
+VALUES
+    ('Juan Perez',   'juan@example.com',   '123456',  '3411111111', 'Calle Falsa 123',         0, '20-12345678-9'),
+    ('Maria Gomez',  'maria@example.com',  'abcdef',  '3412222222', 'Avenida Siempreviva 456', 1, '27-87654321-3'),
+    ('Carlos Lopez', 'carlos@example.com', 'pass123', '3413333333', 'Boulevard Mitre 789',     0, '23-76543210-4');
+
+-- ==========================================
+-- INSERTS EN TABLA RESTAURANTE
+-- ==========================================
+INSERT INTO RESTAURANTE
+    (nombre, num_suc, email, direccion, telefono, turno, imagen, estacionamiento, accesibilidad)
+VALUES
+    ('La Parrilla', 1, 'parrilla@example.com', 'Calle Asado 101', '3414000000', 'mediodia', 'la_parrilla.jpg', 1, 1),
+    ('La Pasta',    2, 'pasta@example.com',    'Calle Fideo 202', '3415000000', 'noche',    'la_pasta.jpg',    0, 1),
+    ('El Veggie',   3, 'veggie@example.com',   'Calle Verde 303', '3416000000', 'mediodia', 'el_veggie.jpg',   1, 0);
+
+-- ==========================================
+-- INSERTS EN TABLA MENU
+-- (tipo_menu es ENUM('vegano','celiaco','clasico','vegetariano'))
+-- ==========================================
+INSERT INTO MENU
+    (tipo_menu, ret_id)
+VALUES
+    -- Menús para La Parrilla (ret_id = 1)
+    ('clasico',      1),
+    ('vegano',       1),
+    -- Menús para La Pasta (ret_id = 2)
+    ('celiaco',      2),
+    ('clasico',      2),
+    -- Menús para El Veggie (ret_id = 3)
+    ('vegano',       3),
+    ('vegetariano',  3);
+
+-- ==========================================
+-- INSERTS EN TABLA PLATO
+-- (tipo es ENUM('entrada','principal','bebida','postre'))
+-- ==========================================
+INSERT INTO PLATO
+    (nombre, precio, descripcion, imagen, categoria)
+VALUES
+    ('Bife de Chorizo',   1200.00, 'Bife jugoso con guarnición de papas fritas', 'bife.jpg',             'principal'),
+    ('Ensalada Mixta',    300.00,  'Lechuga, tomate y cebolla',                  'ensalada.jpg',         'entrada'),
+    ('Jugo Natural',      250.00,  'Zanahoria, naranja y jengibre',             'jugo.jpg',             'bebida'),
+    ('Milanesa Vegana',   1000.00, 'Hecha con soja, acompañada de papas fritas', 'milanesa_vegana.jpg',  'principal'),
+    ('Pizza Napolitana',  800.00,  'Tomate, ajo y mozzarella',                  'napolitana.jpg',       'principal'),
+    ('Tiramisu',          400.00,  'Postre italiano clásico',                   'tiramisu.jpg',         'postre'),
+    ('Ravioles de Ricota',950.00,  'Ravioles caseros con salsa bolognesa',      'ravioles.jpg',         'principal'),
+    ('Ensalada Veggie',   350.00,  'Mix de vegetales frescos y aderezo suave',  'ensalada_veggie.jpg',  'entrada');
+
+-- ==========================================
+-- INSERTS EN TABLA MENUPLATO
+-- Esta tabla relaciona menús y platos
+-- men_id hace referencia a MENU(men_id)
+-- pla_id hace referencia a PLATO(pla_id)
+-- ==========================================
+-- Suponiendo que los men_id se asignan en orden (1 a 6) según los inserts de MENU
+-- Y los pla_id en orden (1 a 8) según los inserts de PLATO
+
+-- Menú 1 (La Parrilla - 'clasico') -> platos: Bife (1), Ensalada Mixta (2), Jugo (3)
+INSERT INTO MENUPLATO (men_id, pla_id) VALUES
+    (1, 1),  -- Bife
+    (1, 2),  -- Ensalada Mixta
+    (1, 3);  -- Jugo
+
+-- Menú 2 (La Parrilla - 'vegano') -> platos: Milanesa Vegana (4), Jugo (3)
+INSERT INTO MENUPLATO (men_id, pla_id) VALUES
+    (2, 4),
+    (2, 3);
+
+-- Menú 3 (La Pasta - 'celiaco') -> platos: Ravioles de Ricota (7), Ensalada Mixta (2)
+INSERT INTO MENUPLATO (men_id, pla_id) VALUES
+    (3, 7),
+    (3, 2);
+
+-- Menú 4 (La Pasta - 'clasico') -> platos: Pizza Napolitana (5), Tiramisu (6)
+INSERT INTO MENUPLATO (men_id, pla_id) VALUES
+    (4, 5),
+    (4, 6);
+
+-- Menú 5 (El Veggie - 'vegano') -> platos: Milanesa Vegana (4), Jugo (3)
+INSERT INTO MENUPLATO (men_id, pla_id) VALUES
+    (5, 4),
+    (5, 3);
+
+-- Menú 6 (El Veggie - 'vegetariano') -> platos: Ensalada Mixta (2), Ensalada Veggie (8)
+INSERT INTO MENUPLATO (men_id, pla_id) VALUES
+    (6, 2),
+    (6, 8);
+
+-- ==========================================
+-- INSERTS EN TABLA RESERVA
+-- (turno es ENUM('mediodia','noche'))
+-- ==========================================
+INSERT INTO RESERVA
+    (turno, cantidad_persona, usu_id, ret_id)
+VALUES
+    ('mediodia', 2, 1, 1),  -- Juan Perez reserva en La Parrilla
+    ('noche',    4, 1, 2),  -- Juan Perez reserva en La Pasta
+    ('mediodia', 3, 3, 1),  -- Carlos Lopez reserva en La Parrilla
+    ('mediodia', 2, 3, 3);  -- Carlos Lopez reserva en El Veggie
+
+-- ==========================================
+-- FIN DEL SCRIPT DE INSERTS
+-- ==========================================
+
