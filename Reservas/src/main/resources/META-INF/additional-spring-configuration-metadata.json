@@ -1,8 +1,0 @@
-{"properties": [
-  {
-    "name": "security.jwt.expiration-in-minute",
-    "type": "java.lang.Long",
-    "description": "Tiempo de expiración del token JWT en minutos."
-  }
-  
-]}

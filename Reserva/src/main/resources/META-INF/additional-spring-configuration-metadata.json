@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "security.jwt.expiration-in-minutos",
+    "type": "java.lang.String",
+    "description": "A description for 'security.jwt.expiration-in-minutos'"
+  },
+  {
+    "name": "security.jwt.clave-secreta",
+    "type": "java.lang.String",
+    "description": "A description for 'security.jwt.clave-secreta'"
+  }
+]}
