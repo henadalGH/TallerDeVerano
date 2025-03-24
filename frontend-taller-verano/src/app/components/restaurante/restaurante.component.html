@@ -1,1 +1,25 @@
-<p>restaurante works!</p>
+<div class="container">
+    <h2>Lista de Restaurantes</h2>
+    
+    <div *ngIf="loading" class="spinner">
+        <p>Cargando...</p>
+    </div>
+    
+    <div *ngIf="error" class="error-message">
+        <p>{{ error }}</p>
+    </div>
+    
+    <div class="restaurantes-grid" *ngIf="!loading && !error">
+        <div *ngFor="let restaurante of restaurantes" class="lista">
+            <p>{{restaurante.imagen}}</p>
+            <h3>{{ restaurante.nombre }}</h3>
+            <p>{{ restaurante.descripcion }}</p>
+            <p>Dirección: {{ restaurante.direccion }}</p>
+            <p>Teléfono: {{ restaurante.telefono }}</p>
+            <p>Correo: {{ restaurante.email }}</p>
+            <p>Accesibilidad: {{ restaurante.accesibilidad }}</p>
+            <p>Estacionamiento: {{restaurante.estacionamiento}}</p>
+            <button>Reservas</button>
+        </div>
+    </div>
+</div>

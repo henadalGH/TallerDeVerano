@@ -6,13 +6,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
-
 import com.Resvas2025.Reserva.model.Usuario;
 import com.Resvas2025.Reserva.model.dto.AuthenticationRequest;
 import com.Resvas2025.Reserva.model.dto.AuthenticationResponse;
-
 import java.util.HashMap;
 import java.util.Map;
+
 
 @Service
 public class AuthenticationService {
@@ -20,6 +19,9 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UsuarioService userService;
     private final JwtService jwtService;
+    
+    // Aquí almacenamos los tokens "revocados" si implementamos una lista negra (opcional)
+    private final Map<String, String> revokedTokens = new HashMap<>();
 
     // Constructor para inyectar dependencias
     public AuthenticationService(AuthenticationManager authenticationManager, UsuarioService userService, JwtService jwtService) {
@@ -67,16 +69,22 @@ public class AuthenticationService {
 
     // Método para generar los claims adicionales (puedes adaptarlo según tus necesidades)
     private Map<String, Object> generateExtraClaims(Usuario user) {
-        // Crear un mapa de claims adicionales que deseas incluir en el JWT
         Map<String, Object> claims = new HashMap<>();
-
-        // Agregar el rol del usuario como un claim
-        claims.put("role", user.getAuthorities().toString());  // Usamos el método getAuthorities() para obtener los roles
-
-        // Puedes agregar más claims si es necesario, por ejemplo:
+        claims.put("role", user.getAuthorities().toString());  // Agregamos el rol del usuario
         claims.put("userId", user.getId());
         claims.put("nombre", user.getNombre());
-
         return claims;
+    }
+
+    // Método para hacer logout
+    public void logout(String token) {
+        // Si tienes un sistema de lista negra de tokens, puedes invalidar el token aquí.
+        revokedTokens.put(token, "revoked");
+        System.out.println("Token invalidado: " + token);
+    }
+
+    // Verifica si un token está revocado (opcional)
+    public boolean isTokenRevoked(String token) {
+        return revokedTokens.containsKey(token);
     }
 }

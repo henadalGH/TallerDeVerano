@@ -3,6 +3,7 @@ package com.Resvas2025.Reserva.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,12 @@ public class UsuarioController {
         AuthenticationResponse rsp = authenticationService.login(authenticationRequest);
         return ResponseEntity.ok(rsp);
     }
+
+    // Método para cerrar sesión
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
+        // Eliminar el token en el cliente, pero aquí invalidamos el token en el servidor
+        authenticationService.logout(token.replace("Bearer ", ""));
+        return ResponseEntity.ok("Sesión cerrada exitosamente");
+    }
 }
-
-

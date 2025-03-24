@@ -19,7 +19,7 @@ public class RestauranteController {
         this.restauranteService = restauranteService;
     }
 
-    @GetMapping
+    @GetMapping("/lista")
     public List<Restaurante> obtenerTodos() {
         return restauranteService.obtenerTodosLosRestaurantes();
     }

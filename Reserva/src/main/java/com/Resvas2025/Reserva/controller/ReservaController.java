@@ -20,7 +20,8 @@ public class ReservaController {
         this.reservaService = reservaService;
     }
 
-    @GetMapping
+
+    @GetMapping("/lista")
     public List<Reserva> obtenerTodas() {
         return reservaService.obtenerTodas();
     }
