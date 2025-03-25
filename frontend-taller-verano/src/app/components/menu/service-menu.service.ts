@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AppModule, Menu } from 'src/app/app.module';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceMenuService {
+  private apiUrl = 'http://localhost:8080/menus/restaurante/**';
 
-  private apiUrl = 'https://tudominio.com/api/restaurantes'; // Cambialo por el real
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getRestaurantes(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  obtenerMenusPorRestaurante(restauranteId: number): Observable<Menu[]> {
+    return this.http.get<Menu[]>(`${this.apiUrl}/restaurante/${restauranteId}`);
   }
-
-  getRestauranteById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-  
 }

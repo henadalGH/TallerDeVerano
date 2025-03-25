@@ -33,10 +33,18 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule, // Necesario para el manejo de formularios
-    HttpClientModule // Necesario para realizar peticiones HTTP
+    HttpClientModule
+     // Necesario para realizar peticiones HTTP
   ],
   providers: [ServiceRestauranteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
+export interface Menu {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  precio: number;
+  restauranteId: number;
+}

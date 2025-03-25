@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceMenuService } from './service-menu.service';
+import { ActivatedRoute } from '@angular/router';
+import { ServiceMenuService } from 'src/app/components/menu/service-menu.service';
+import { AppModule, Menu } from 'src/app/app.module';
 
 @Component({
   selector: 'app-menu',
@@ -7,23 +9,32 @@ import { ServiceMenuService } from './service-menu.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  menus: Menu[] = [];
+  errorMessage: string = '';
 
-  restaurantes: any[] = [];
-  loading = true;
-
-  constructor(private menuService: ServiceMenuService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private menuService: ServiceMenuService
+  ) {}
 
   ngOnInit(): void {
-    this.menuService.getRestaurantes().subscribe({
-      next: (data) => {
-        this.restaurantes = data;
-        this.loading = false;
+    const idRestaurante = Number(this.route.snapshot.paramMap.get('idRestaurante')); // Obtener el ID de la URL
+    if (!isNaN(idRestaurante)) {
+      this.cargarMenus(idRestaurante);
+    } else {
+      this.errorMessage = 'Restaurante no encontrado.';
+    }
+  }
+
+  cargarMenus(idRestaurante: number) {
+    this.menuService.obtenerMenusPorRestaurante(idRestaurante).subscribe(
+      (data) => {
+        this.menus = data;
       },
-      error: (err) => {
-        console.error('Error al cargar restaurantes', err);
-        this.loading = false;
+      (error) => {
+        console.error('Error al obtener menús:', error);
+        this.errorMessage = 'No se pudieron cargar los menús.';
       }
-    });
+    );
   }
 }
-

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceRestauranteService } from './service-retaurante.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth-service.service';
 
 @Component({
   selector: 'app-restaurante',
@@ -7,11 +9,24 @@ import { ServiceRestauranteService } from './service-retaurante.service';
   styleUrls: ['./restaurante.component.css']
 })
 export class RestauranteComponent implements OnInit {
+ 
   restaurantes: any[] = [];
   loading: boolean = true;
   error: string | null = null;
 
-  constructor(private restauranteService: ServiceRestauranteService) { }
+  constructor(private restauranteService: ServiceRestauranteService, private router: Router, private authService: AuthService) { }
+
+  irReserva() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/reservas']);  // Si el usuario está logueado, lo lleva a la página de reservas
+    } else {
+      this.router.navigate(['/login']);  // Si no está logueado, lo redirige al login
+    }
+  }
+
+  irMenu(restauranteId: number) {
+    this.router.navigate(['/menu', restauranteId]);  // Pasamos el ID del restaurante como parámetro
+  }
 
   ngOnInit(): void {
     this.obtenerRestaurantes();

@@ -44,10 +44,11 @@ public class HttpSecurityConfig {
     @Bean
 public CorsFilter corsFilter() {
     CorsConfiguration corsConfiguration = new CorsConfiguration();
-    corsConfiguration.addAllowedOrigin("*");  // Permite todos los orígenes (no recomendable para producción)
-    corsConfiguration.addAllowedMethod("*");  // Permite todos los métodos
-    corsConfiguration.addAllowedHeader("*");  // Permite todos los encabezados
-    corsConfiguration.addExposedHeader("Authorization"); // Permite que el encabezado Authorization sea expuesto
+    corsConfiguration.addAllowedOrigin("http://localhost:4200");  // Para desarrollo, en producción pon el dominio de tu frontend
+    corsConfiguration.addAllowedMethod("*");  // Puedes especificar los métodos si es necesario
+    corsConfiguration.addAllowedHeader("*");  // Permite todos los encabezados, ajusta si es necesario
+    corsConfiguration.addExposedHeader("Authorization");  // Exponer el encabezado Authorization
+    corsConfiguration.setAllowCredentials(true);  // Habilitar el envío de credenciales
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", corsConfiguration);  // Aplica la configuración a todas las rutas
@@ -69,7 +70,8 @@ public CorsFilter corsFilter() {
                 authReqConfig
                     .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() // URL de login pública
                     .requestMatchers(HttpMethod.GET, "/reservas").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // Acceso solo a usuarios con los roles USER o ADMIN
-                    .requestMatchers(HttpMethod.GET,"/restaurantes/lista").permitAll();
+                    .requestMatchers(HttpMethod.GET,"/restaurantes/lista").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/menus/restaurante/**").permitAll();
                 // Requiere autenticación para el resto de las solicitudes
                 authReqConfig.anyRequest().authenticated();
             });

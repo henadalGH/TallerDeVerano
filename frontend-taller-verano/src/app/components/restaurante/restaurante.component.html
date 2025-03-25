@@ -19,7 +19,8 @@
             <p>Correo: {{ restaurante.email }}</p>
             <p>Accesibilidad: {{ restaurante.accesibilidad }}</p>
             <p>Estacionamiento: {{restaurante.estacionamiento}}</p>
-            <button>Reservas</button>
+            <button (click)="irMenu(restaurante.id)">Menú</button>
+            <button (click)="irReserva()">Reservas</button>
         </div>
     </div>
 </div>

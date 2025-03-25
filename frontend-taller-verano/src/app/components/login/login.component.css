@@ -1,124 +1,119 @@
-/* Fondo con gradiente llamativo */
+/* Estilo para el contenedor del login */
 .login-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-}
-
-/* Tarjeta con efecto de elevación */
-.login-card {
-    position: relative;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Fondo del card */
+  .card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+  
+  /* Estilo del card (tarjeta de login) */
+  .login-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
     width: 100%;
     max-width: 400px;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
-
-/* Efecto de tarjetas superpuestas */
-.card-background {
-    position: absolute;
+  }
+  
+  /* Título */
+  .login-card h2 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #333;
+  }
+  
+  /* Estilos para los inputs */
+  .login-input {
     width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    transform: rotate(6deg);
-    background: rgba(255, 255, 255, 0.15);
-    z-index: -1;
-}
-
-.card-background:nth-child(1) {
-    transform: rotate(-6deg);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* Título del login */
-.login-card h2 {
-    font-size: 1.8rem;
-    color: white;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-/* Campos de entrada */
-.login-input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.3);
-    color: white;
-    font-size: 1rem;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-}
-
-.login-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.login-input:hover,
-.login-input:focus {
-    background: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s ease;
+  }
+  
+  .login-input:focus {
+    border-color: #3498db;
     outline: none;
-}
-
-/* Botón llamativo */
-.login-button {
+  }
+  
+  /* Estilo para el botón de login */
+  .login-button {
     width: 100%;
     padding: 12px;
-    margin-top: 20px;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    background-color: #3498db;
     color: white;
-    font-size: 1rem;
-    font-weight: bold;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    font-size: 1.1em;
     cursor: pointer;
-    box-shadow: 0px 8px 15px rgba(255, 75, 43, 0.3);
-    transition: all 0.3s ease-in-out;
-}
-
-.login-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 10px 20px rgba(255, 75, 43, 0.5);
-}
-
-/* Enlaces */
-.text-link {
-    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Enlaces de ayuda */
+  .text-blue-500 {
+    color: #3498db;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-
-.text-link:hover {
-    color: #ffcccb;
-}
-
-/* Separador */
-.separator {
+  }
+  
+  .text-blue-500:hover {
+    text-decoration: underline;
+  }
+  
+  /* Sección para recordar y enlace de "olvidé la contraseña" */
+  .flex {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    margin: 15px 0;
-}
-
-.separator::before,
-.separator::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.separator span {
-    padding: 0 10px;
-    color: white;
-    font-size: 0.9rem;
-}
+  }
+  
+  .flex label {
+    font-size: 0.9em;
+    color: #333;
+  }
+  
+  .flex a {
+    font-size: 0.9em;
+    color: #3498db;
+  }
+  
+  .flex a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilo de la sección de registro */
+  .text-center {
+    margin-top: 20px;
+  }
+  
+  .text-center a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  .text-center a:hover {
+    text-decoration: underline;
+  }
+  

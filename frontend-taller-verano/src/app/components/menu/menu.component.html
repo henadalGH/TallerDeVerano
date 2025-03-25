@@ -1,39 +1,19 @@
-<div class="menu-container">
-    <!-- Barra lateral<div class="side-menu">
-        <div class="user-info">👤 Usuario: Juan Pérez</div>
-        <ul>
-            <li>📝 Personalizar Perfil</li>
-            <li>⚙️ Configuración</li>
-            <li>❓ Ayuda</li>
-            <li>🚪 Cerrar Sesión</li>
-        </ul>
-    </div> -->
-    
+<div class="container">
+  <h2>Menú del Restaurante</h2>
 
-    <!-- Contenido principal -->
-    <div class="main-content">
-        <!-- Tabs estilo Chrome -->
-        <div class="menu-tabs">
-            <button class="tab active">Menu Clásico</button>
-            <button class="tab">Menu Veggie</button>
-            <button class="tab">Menu Apto Celíacos</button>
-        </div>
+  <div *ngIf="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+  </div>
 
-        <!-- Spinner mientras carga -->
-        <div *ngIf="loading" class="spinner-container">
-            <div class="spinner"></div>
-        </div>
+  <div *ngIf="menus.length === 0 && !errorMessage">
+      <p>No hay menús disponibles.</p>
+  </div>
 
-        <!-- <div class="restaurant-grid" *ngIf="!loading">
-            <div class="restaurant-card"
-                *ngFor="let restaurante of restaurantes"
-                [routerLink]="['/restaurante', restaurante.id]">
-                <div class="restaurant-header">{{ restaurante.nombre }}</div>
-                <div class="info-text">📍 {{ restaurante.direccion }}</div>
-            </div>
-        </div>Lista restaurantes cuando ya cargó -->
-        
-        <app-restaurante></app-restaurante>
-    </div>
+  <div class="menus-grid" *ngIf="menus.length > 0">
+      <div *ngFor="let menu of menus" class="menu-item">
+          <h3>{{ menu.nombre }}</h3>
+          <p>{{ menu.descripcion }}</p>
+          <p>Precio: ${{ menu.precio }}</p>
+      </div>
+  </div>
 </div>
-

@@ -1,13 +1,9 @@
 package com.Resvas2025.Reserva.model;
 
-
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @NoArgsConstructor
@@ -25,11 +21,9 @@ public class Menu {
 
     @ManyToOne
     @JoinColumn(name = "ret_id", nullable = false)
-    @JsonIgnore 
+    @JsonBackReference  // Asegura que la relación con Restaurante no cause un ciclo infinito
     private Restaurante restaurante;
 
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<MenuPlato> menuPlatos;
-
 }

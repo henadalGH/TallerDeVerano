@@ -3,8 +3,7 @@ package com.Resvas2025.Reserva.model;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Data
@@ -46,7 +45,6 @@ public class Restaurante {
     private boolean accesibilidad;
 
     @OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore 
+    @JsonManagedReference  // Asegura que los menús se serialicen correctamente
     private List<Menu> menus;
 }
-
