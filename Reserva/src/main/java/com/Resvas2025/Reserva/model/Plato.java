@@ -5,7 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Data
@@ -35,7 +36,7 @@ public class Plato {
     private String categoria;
 
     @OneToMany(mappedBy = "plato", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonBackReference
     private List<MenuPlato> menuPlatos;
 
 }

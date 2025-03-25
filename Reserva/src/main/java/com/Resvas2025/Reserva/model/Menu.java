@@ -21,7 +21,7 @@ public class Menu {
 
     @ManyToOne
     @JoinColumn(name = "ret_id", nullable = false)
-    @JsonBackReference  // Asegura que la relación con Restaurante no cause un ciclo infinito
+    @JsonBackReference  
     private Restaurante restaurante;
 
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)

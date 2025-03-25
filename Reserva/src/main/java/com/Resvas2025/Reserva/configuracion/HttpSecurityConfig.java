@@ -71,7 +71,13 @@ public CorsFilter corsFilter() {
                     .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() // URL de login pública
                     .requestMatchers(HttpMethod.GET, "/reservas").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // Acceso solo a usuarios con los roles USER o ADMIN
                     .requestMatchers(HttpMethod.GET,"/restaurantes/lista").permitAll()
-                    .requestMatchers(HttpMethod.GET,"/menus/restaurante/**").permitAll();
+                    .requestMatchers(HttpMethod.GET,"/menus/restaurante/{restauranteId}").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/platos").permitAll()
+                    .requestMatchers(HttpMethod.GET, "restaurante/{id}").hasAnyAuthority("ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/restaurantes").hasAnyAuthority("ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/restaurantes/{id}").hasAnyAuthority("ROLE_ADMIN")
+                    ;
+
                 // Requiere autenticación para el resto de las solicitudes
                 authReqConfig.anyRequest().authenticated();
             });
