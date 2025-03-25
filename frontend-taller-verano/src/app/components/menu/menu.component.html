@@ -11,7 +11,8 @@
 
   <div class="menus-grid" *ngIf="menus.length > 0">
       <div *ngFor="let menu of menus" class="menu-item">
-          <h3>{{ menu.nombre }}</h3>
+          <h3>nombe: {{ menu.nombre }}</h3>
+          <p>{{menu.nombre}}</p>
           <p>{{ menu.descripcion }}</p>
           <p>Precio: ${{ menu.precio }}</p>
       </div>

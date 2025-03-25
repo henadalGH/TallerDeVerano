@@ -4,22 +4,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = false;  // Aquí podrías usar un sistema real de autenticación, como un token
+
+  private storageKey = 'authToken';  // Clave para el almacenamiento
 
   constructor() {}
 
   // Método para verificar si el usuario está logueado
-  isLoggedIn() {
-    return this.loggedIn;  // Aquí se puede agregar lógica para verificar el estado de sesión
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem(this.storageKey);  // Devuelve true si hay un token en el localStorage
   }
 
   // Método para iniciar sesión (simulado)
   login() {
-    this.loggedIn = true;
+    localStorage.setItem(this.storageKey, 'token');  // Aquí deberías guardar un token real
   }
 
   // Método para cerrar sesión (simulado)
   logout() {
-    this.loggedIn = false;
+    localStorage.removeItem(this.storageKey);  // Elimina el token del localStorage
   }
 }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ServicePlatoService } from './service-plato.service';
+import { ResevasService } from './resevas.service';
 
-describe('ServicePlatoService', () => {
-  let service: ServicePlatoService;
+describe('ResevasService', () => {
+  let service: ResevasService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ServicePlatoService);
+    service = TestBed.inject(ResevasService);
   });
 
   it('should be created', () => {

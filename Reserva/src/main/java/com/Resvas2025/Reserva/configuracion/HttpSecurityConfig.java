@@ -76,6 +76,9 @@ public CorsFilter corsFilter() {
                     .requestMatchers(HttpMethod.GET, "restaurante/{id}").hasAnyAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.POST, "/restaurantes").hasAnyAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.DELETE, "/restaurantes/{id}").hasAnyAuthority("ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.POST,"/reservas").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "revervas//{id}").hasAuthority("ROLE_ADMIN")
+                    .requestMatchers(HttpMethod.DELETE,"/reservas/{id}").hasAuthority("ROLE_ADMIN")
                     ;
 
                 // Requiere autenticación para el resto de las solicitudes
