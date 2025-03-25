@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ReservaApplication",
+            "request": "launch",
+            "mainClass": "com.Resvas2025.Reserva.ReservaApplication",
+            "projectName": "Reserva"
+        },
+        {
+            "type": "java",
             "name": "CampusDeVeranoApplication",
             "request": "launch",
             "mainClass": "com.example.CampusDeVerano.CampusDeVeranoApplication",

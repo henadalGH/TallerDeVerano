@@ -3,9 +3,10 @@ package com.Resvas2025.Reserva.model;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.*;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "menu")
@@ -21,7 +22,7 @@ public class Menu {
 
     @ManyToOne
     @JoinColumn(name = "ret_id", nullable = false)
-    @JsonBackReference  
+    @JsonIgnore  
     private Restaurante restaurante;
 
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)

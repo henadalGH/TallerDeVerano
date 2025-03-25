@@ -54,4 +54,16 @@ public class MenuServiceImpl implements MenuService{
                          .toList();
     }
 
+    @Override
+    public List<Menu> obtenerMenusCompletosPorRestaurante(Integer restauranteId) {
+        List<Menu> menus = menuRepository.findByRestaurante_Id(restauranteId);
+
+        menus.forEach(menu -> menu.setMenuPlatos(
+            menuPlatoRepository.findByMenu_MenId(menu.getMenId())
+        ));
+
+        return menus;
+    }
+
+
 }

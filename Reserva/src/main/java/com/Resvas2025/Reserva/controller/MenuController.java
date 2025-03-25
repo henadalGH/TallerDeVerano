@@ -22,21 +22,15 @@ public class MenuController {
     }
 
     @GetMapping("/restaurante/{restauranteId}")
-public ResponseEntity<List<Menu>> obtenerMenusPorRestaurante(@PathVariable Integer restauranteId) {
-    try {
-        List<Menu> menus = menuService.obtenerMenusPorRestaurante(restauranteId);
+    public ResponseEntity<List<Menu>> obtenerMenusCompletosPorRestaurante(@PathVariable Integer restauranteId) {
+        List<Menu> menus = menuService.obtenerMenusCompletosPorRestaurante(restauranteId);
 
         if (menus.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Retorna 204 si no hay menús
+            return ResponseEntity.noContent().build();
         }
 
-        return ResponseEntity.ok(menus);  // Retorna 200 con la lista de menús
-
-    } catch (Exception e) {
-        // Manejo de excepciones para errores inesperados
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        return ResponseEntity.ok(menus);
     }
-}
 
 
     @PostMapping

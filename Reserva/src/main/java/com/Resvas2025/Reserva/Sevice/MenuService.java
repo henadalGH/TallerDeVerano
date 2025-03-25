@@ -11,4 +11,5 @@ public interface MenuService {
     public Menu agregarMenu(Menu menu);
     public boolean eliminarMenu(Integer id);
     public List<Plato> obtenerPlatosPorMenu(Integer menuId);
+    public List<Menu> obtenerMenusCompletosPorRestaurante(Integer restauranteId);
 }
