@@ -7,7 +7,7 @@ import { Menu } from 'src/app/app.module';  // Asegúrate de que 'Menu' esté bi
   providedIn: 'root'
 })
 export class ServiceMenuService {
-  private apiUrl = 'http://localhost:8080/menus';  // Base URL
+  private apiUrl = 'http://localhost:8080/menus/restaurante';  // Base URL
 
   constructor(private http: HttpClient) {}
 

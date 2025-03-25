@@ -16,6 +16,7 @@ import { ServiceRestauranteService } from './components/reserva/service-restaura
 // Importar módulos necesarios para formularios y HTTP
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ResevasService } from './components/reserva/resevas.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
      // Necesario para realizar peticiones HTTP
   ],
-  providers: [ServiceRestauranteService],
+  providers: [ServiceRestauranteService, ResevasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

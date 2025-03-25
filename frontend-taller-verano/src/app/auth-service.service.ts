@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  getUserId() {
+    throw new Error('Method not implemented.');
+  }
 
   private storageKey = 'authToken';  // Clave para el almacenamiento
 
